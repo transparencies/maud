@@ -157,3 +157,8 @@ impl<W: io::Write> fmt::Write for Utf8Writer<W> {
 pub trait Template: FnOnce(&mut fmt::Write) -> fmt::Result {}
 
 impl<T> Template for T where T: FnOnce(&mut fmt::Write) -> fmt::Result {}
+
+pub trait Wrapper {
+    fn before(&self, w: &mut fmt::Write) -> fmt::Result;
+    fn after(&self, w: &mut fmt::Write) -> fmt::Result;
+}
