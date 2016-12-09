@@ -81,7 +81,7 @@ pub fn parse(cx: &ExtCtxt, sp: Span, input: &[TokenTree]) -> PResult<P<Expr>> {
     parser.markups()?;
     // Heuristic: the size of the resulting markup tends to correlate with the
     // code size of the template itself
-    let size_hint = pprust::tts_to_string(&input).len();
+    let size_hint = pprust::tts_to_string(&input).len().next_power_of_two();
     Ok(parser.into_render().into_expr(size_hint))
 }
 
